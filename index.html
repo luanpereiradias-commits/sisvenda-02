@@ -1,1 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SisVenda | Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <style>
+        body { background-color: #f0f2f5; }
+        .sidebar { background: #2c3e50; min-height: 100vh; color: white; }
+        .nav-link { color: rgba(255,255,255,0.8); transition: 0.3s; }
+        .nav-link:hover { color: white; background: rgba(255,255,255,0.1); border-radius: 5px; }
+        .card-stats { border: none; border-radius: 10px; transition: transform 0.3s; }
+        .card-stats:hover { transform: translateY(-5px); }
+        .icon-box { font-size: 2rem; opacity: 0.8; }
+    </style>
+</head>
+<body>
 
+<div class="container-fluid">
+    <div class="row">
+        <nav class="col-md-2 d-none d-md-block sidebar shadow-sm p-3">
+            <h4 class="text-center mb-4">🛒 SisVenda</h4>
+            <ul class="nav flex-column">
+                <li class="nav-item mb-2">
+                    <a class="nav-link active" href="#"><i class="bi bi-speedometer2 me-2"></i> Dashboard</a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a class="nav-link" href="vendas.html"><i class="bi bi-cart-plus me-2"></i> Nova Venda</a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a class="nav-link" href="estoque.html"><i class="bi bi-box-seam me-2"></i> Estoque/Produtos</a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a class="nav-link" href="cliente.html"><i class="bi bi-people me-2"></i> Clientes</a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a class="nav-link" href="relatorios.html"><i class="bi bi-file-earmark-bar-graph me-2"></i> Relatórios</a>
+                </li>
+            </ul>
+            <hr>
+            <div class="text-center small opacity-50">v1.0.0 - 2026</div>
+        </nav>
+
+        <main class="col-md-10 ms-sm-auto px-md-4 py-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">Resumo Geral</h1>
+                <div class="btn-toolbar mb-2 mb-md-0">
+                    <button type="button" class="btn btn-sm btn-outline-primary" onclick="window.print()">
+                        <i class="bi bi-printer me-1"></i> Imprimir Status
+                    </button>
+                </div>
+            </div>
+
+            <div class="row g-4 mb-4">
+                <div class="col-12 col-sm-6 col-xl-3">
+                    <div class="card card-stats bg-white shadow-sm p-3">
+                        <div class="d-flex align-items-center">
+                            <div class="icon-box text-primary me-3"><i class="bi bi-currency-dollar"></i></div>
+                            <div>
+                                <h6 class="text-muted mb-0">Vendas Hoje</h6>
+                                <h4 class="mb-0">R$ 1.250,00</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-xl-3">
+                    <div class="card card-stats bg-white shadow-sm p-3">
+                        <div class="d-flex align-items-center">
+                            <div class="icon-box text-success me-3"><i class="bi bi-check-circle"></i></div>
+                            <div>
+                                <h6 class="text-muted mb-0">Pedidos Concluídos</h6>
+                                <h4 class="mb-0">24</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-xl-3">
+                    <div class="card card-stats bg-white shadow-sm p-3">
+                        <div class="d-flex align-items-center">
+                            <div class="icon-box text-warning me-3"><i class="bi bi-exclamation-triangle"></i></div>
+                            <div>
+                                <h6 class="text-muted mb-0">Estoque Baixo</h6>
+                                <h4 class="mb-0">5 Itens</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-xl-3">
+                    <div class="card card-stats bg-white shadow-sm p-3">
+                        <div class="d-flex align-items-center">
+                            <div class="icon-box text-info me-3"><i class="bi bi-person-plus"></i></div>
+                            <div>
+                                <h6 class="text-muted mb-0">Novos Clientes</h6>
+                                <h4 class="mb-0">12</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card shadow-sm border-none">
+                <div class="card-header bg-white font-weight-bold">Últimas Movimentações</div>
+                <div class="table-responsive p-3">
+                    <table class="table table-hover align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Horário</th>
+                                <th>Cliente</th>
+                                <th>Status</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>10:45</td>
+                                <td>Ana Souza</td>
+                                <td><span class="badge bg-success">Pago</span></td>
+                                <td>R$ 450,00</td>
+                            </tr>
+                            <tr>
+                                <td>09:30</td>
+                                <td>Marcos Lima</td>
+                                <td><span class="badge bg-warning text-dark">Pendente</span></td>
+                                <td>R$ 120,50</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

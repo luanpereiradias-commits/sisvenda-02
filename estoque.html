@@ -1,1 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Estoque - SisVenda</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #34495e;
+            --accent: #3498db;
+            --danger: #e74c3c;
+            --success: #27ae60;
+        }
 
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f8f9fa; margin: 0; padding: 20px; }
+        .container { max-width: 900px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        
+        h2 { color: var(--primary); border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        
+        /* Formulário de Adição Rápida */
+        .form-inline { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 10px; margin-bottom: 30px; background: #f1f1f1; padding: 15px; border-radius: 8px; }
+        input { padding: 8px; border: 1px solid #ddd; border-radius: 4px; }
+        
+        button { cursor: pointer; border: none; border-radius: 4px; transition: 0.3s; font-weight: bold; }
+        .btn-add { background-color: var(--success); color: white; }
+        .btn-add:hover { background-color: #219150; }
+
+        /* Tabela de Estoque */
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background-color: var(--primary); color: white; }
+        tr:hover { background-color: #f1f1f1; }
+
+        .status-baixo { color: var(--danger); font-weight: bold; }
+        .badge { padding: 4px 8px; border-radius: 12px; font-size: 12px; background: #eee; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>📦 Gestão de Estoque</h2>
+
+    <form class="form-inline">
+        <input type="text" placeholder="Nome do Produto" required>
+        <input type="number" placeholder="Preço (R$)" step="0.01" required>
+        <input type="number" placeholder="Qtd. Inicial" required>
+        <button type="submit" class="btn-add">Adicionar</button>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Produto</th>
+                <th>Preço</th>
+                <th>Qtd.</th>
+                <th>Status</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>01</td>
+                <td>Teclado Mecânico</td>
+                <td>R$ 250,00</td>
+                <td>15</td>
+                <td><span class="badge">Normal</span></td>
+                <td><button style="color: var(--accent)">Editar</button></td>
+            </tr>
+            <tr>
+                <td>02</td>
+                <td>Mouse Gamer</td>
+                <td>R$ 120,00</td>
+                <td class="status-baixo">3</td>
+                <td><span class="badge" style="background: #ffd7d7; color: var(--danger)">Crítico</span></td>
+                <td><button style="color: var(--accent)">Editar</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

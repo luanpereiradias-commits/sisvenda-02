@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Vendas - Nova Venda</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f8f9fa; padding: 20px; }
+        .card { box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .total-destaque { font-size: 1.5rem; font-weight: bold; color: #198754; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Registrar Nova Venda</h4>
+        </div>
+        <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label class="form-label">Cliente</label>
+                    <select class="form-select" id="cliente">
+                        <option value="">Selecione um cliente...</option>
+                        <option value="1">João Silva</option>
+                        <option value="2">Maria Oliveira</option>
+                    </select>
+                </div>
+                <div class="col-md-6 text-end d-flex align-items-end justify-content-end">
+                    <div class="total-destaque">Total: R$ <span id="valorTotal">0,00</span></div>
+                </div>
+            </div>
+
+            <hr>
+
+            <form id="formItem" class="row g-3 align-items-end">
+                <div class="col-md-5">
+                    <label class="form-label">Produto</label>
+                    <select class="form-select" id="produtoSelect">
+                        <option value="" data-preco="0">Selecione o produto...</option>
+                        <option value="Notebook" data-preco="3500.00">Notebook (Estoque: 10)</option>
+                        <option value="Mouse" data-preco="50.00">Mouse (Estoque: 50)</option>
+                        <option value="Teclado" data-preco="120.00">Teclado (Estoque: 15)</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Qtd</label>
+                    <input type="number" class="form-control" id="quantidade" value="1" min="1">
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Preço Unitário</label>
+                    <input type="text" class="form-control" id="precoUnitario" readonly>
+                </div>
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-success w-100" onclick="adicionarItem()">Adicionar</button>
+                </div>
+            </form>
+
+            <div class="table-responsive mt-4">
+                <table class="table table-hover">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Produto</th>
+                            <th>Qtd</th>
+                            <th>Vl. Unitário</th>
+                            <th>Subtotal</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody id="listaItens">
+                        </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card-footer text-end">
+            <button class="btn btn-secondary me-2" onclick="window.location.reload()">Cancelar</button>
+            <button class="btn btn-primary" onclick="finalizarVenda()">Finalizar Venda</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    let totalGeral = 0;
+
+    // Atualiza o preço unitário ao selecionar o produto
+    document.getElementById('produtoSelect').addEventListener('change', function() {
+        const preco = this.options[this.selectedIndex].getAttribute('data-preco');
+        document.getElementById('precoUnitario').value = parseFloat(preco).toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+    });
+
+    function adicionarItem() {
+        const select = document.getElementById('produtoSelect');
+        const nome = select.value;
+        const preco = parseFloat(select.options[select.selectedIndex].getAttribute('data-preco'));
+        const qtd = parseInt(document.getElementById('quantidade').value);
+
+        if (!nome || qtd <= 0) return alert("Selecione um produto e quantidade válida!");
+
+        const subtotal = preco * qtd;
+        totalGeral += subtotal;
+
+        const row = `<tr>
+            <td>${nome}</td>
+            <td>${qtd}</td>
+            <td>R$ ${preco.toFixed(2)}</td>
+            <td>R$ ${subtotal.toFixed(2)}</td>
+            <td><button class="btn btn-danger btn-sm" onclick="removerItem(this, ${subtotal})">Remover</button></td>
+        </tr>`;
+
+        document.getElementById('listaItens').innerHTML += row;
+        atualizarTotal();
+    }
+
+    function removerItem(btn, valor) {
+        btn.closest('tr').remove();
+        totalGeral -= valor;
+        atualizarTotal();
+    }
+
+    function atualizarTotal() {
+        document.getElementById('valorTotal').innerText = totalGeral.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+    }
+
+    function finalizarVenda() {
+        if (totalGeral === 0) return alert("Adicione ao menos um item!");
+        alert("Venda enviada com sucesso para o banco de dados!");
+        window.location.reload();
+    }
+</script>
+
+</body>
+</html>
